@@ -22,12 +22,11 @@ function get_mask(v)
     v:value("30", "255.255.255.252(30)")
 end
 
-m = Map("n2n_v2", translate("N2N v2 VPN"), translatef(
-            "n2n is a layer-two peer-to-peer virtual private network (VPN) which allows users to exploit features typical of P2P applications at network instead of application level."))
+m = Map("n2n_v2")
+m.title = translate("N2N v2 VPN")
+m.description = translatef("n2n is a layer-two peer-to-peer virtual private network (VPN) which allows users to exploit features typical of P2P applications at network instead of application level.")
 
--- Basic config
--- edge
-m:section(SimpleSection).template = "n2n_v2/status"
+m:section(SimpleSection).template = "n2n_v2/n2n_v2_status"
 
 s = m:section(TypedSection, "edge", translate("N2N Edge Settings"))
 s.anonymous = true
@@ -60,10 +59,20 @@ mtu.optional = false
 supernode = s:option(Value, "supernode", translate("Supernode Host"))
 supernode.datatype = "host"
 supernode.optional = false
+supernode.rmempty = false
 
 port = s:option(Value, "port", translate("Supernode Port"))
 port.datatype = "port"
 port.optional = false
+port.rmempty = false
+
+second_supernode = s:option(Value, "second_supernode", translate("Second Supernode Host"))
+second_supernode.datatype = "host"
+second_supernode.optional = false
+
+second_port = s:option(Value, "second_port", translate("Second Supernode Port"))
+second_port.datatype = "port"
+second_port.optional = false
 
 community = s:option(Value, "community", translate("N2N Community name"))
 community.optional = false
